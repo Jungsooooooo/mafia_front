@@ -16,7 +16,11 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    axios.post();
+    const input = {
+      name: username,
+      password: password,
+    };
+    axios.post("/api/users/login", input);
   };
 
   return (
