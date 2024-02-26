@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import Input from "@mui/material/Input";
+import Button from "@mui/material/Button";
+import "../css/Login.css";
 
 const Login = () => {
   const [username, setUserName] = useState("");
@@ -17,28 +20,39 @@ const Login = () => {
 
   const handleLogin = () => {
     const input = {
-      name: username,
+      username: username,
       password: password,
     };
-    axios.post("/api/users/login", input);
+    axios.post("/api/auth/authenticate", input).then((res) => {
+      console.log(res.data);
+    });
   };
 
   return (
-    <>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={handleInputChange}
-      />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleLogin}>로그인</button>
-    </>
+    <div className="centered">
+      <div>
+        <h1>MAFIA</h1>
+      </div>
+      <div>
+        <Input
+          type="text"
+          name="username"
+          placeholder="아이디"
+          value={username}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <Input
+          type="password"
+          name="password"
+          placeholder="비밀번호는 8자리 이상"
+          value={password}
+          onChange={handleInputChange}
+        />
+      </div>
+      <Button onClick={handleLogin}>로그인</Button>
+    </div>
   );
 };
 
