@@ -1,14 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+import {
+  legacy_createStore as createStore,
+  applyMiddleware,
+  compose,
+} from "redux";
+import { Provider } from "react-redux";
+import logger from "redux-logger";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+import rootReducer from "./reducers";
+
+const enhancer =
+  process.env.NODE_ENV === "production"
+    ? compose(applyMiddleware())
+    : composeWithDevTools(applyMiddleware(logger));
+
+// 위에서 만든 reducer를 스토어 만들때 넣어줍니다
+const store = createStore(rootReducer, enhancer);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+ReactDOM.render(
+  // 만든 store를 앱 상위에 넣어줍니다.
+  <Provider store={store}>
     <App />
-  </React.StrictMode>
+  </Provider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
