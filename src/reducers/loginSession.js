@@ -23,3 +23,5 @@ const loginSession = (state = initalState, action) => {
       return state;
   }
 };
+
+export default loginSession;

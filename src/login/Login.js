@@ -3,8 +3,12 @@ import { useState } from "react";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import "../css/Login.css";
+import { useDispatch } from "react-redux";
+import { loginInfo } from "../reducers/loginSession";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,7 +28,7 @@ const Login = () => {
       password: password,
     };
     axios.post("/api/auth/authenticate", input).then((res) => {
-      console.log(res.data);
+      dispatch(loginInfo(res.data.token));
     });
   };
 
