@@ -28,7 +28,9 @@ const Login = () => {
       password: password,
     };
     axios.post("/api/auth/authenticate", input).then((res) => {
-      dispatch(loginInfo(res.data.token));
+      if (res.data.token !== "") {
+        dispatch(loginInfo(res.data.token));
+      }
     });
   };
 
