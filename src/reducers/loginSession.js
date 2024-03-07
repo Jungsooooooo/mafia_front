@@ -5,11 +5,12 @@
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
-export const loginInfo = (token) => ({ type: LOGIN, token });
+export const loginInfo = (token, id) => ({ type: LOGIN, token, id });
 
 const initalState = {
   token: "",
   isLogged: false,
+  id: "",
 };
 
 const loginSession = (state = initalState, action) => {
@@ -19,12 +20,14 @@ const loginSession = (state = initalState, action) => {
         ...state,
         isLogged: true,
         token: action.token,
+        id: action.id,
       };
     case LOGOUT:
       return {
         ...state,
         isLogged: false,
         token: "",
+        id: "",
       };
 
     // default를 쓰지 않으면 맨처음 state에 count값이 undefined가 나옵니다 꼭! default문을 넣으세요

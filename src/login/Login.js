@@ -29,7 +29,8 @@ const Login = () => {
     };
     axios.post("/api/auth/authenticate", input).then((res) => {
       if (res.data.token !== "") {
-        dispatch(loginInfo(res.data.token));
+        dispatch(loginInfo(res.data.token, res.data.username));
+        localStorage.setItem(res.data.id, res.data.token);
       }
     });
   };
