@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { createRoot } from "react-dom/client";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import logger from "redux-logger";
@@ -19,8 +20,8 @@ const enhancer =
 // 위에서 만든 reducer를 스토어 만들때 넣어줍니다
 const store = createStore(rootReducer, enhancer);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"));
+root.render(
   // 만든 store를 앱 상위에 넣어줍니다.
   <Provider store={store}>
     <App />
