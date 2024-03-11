@@ -6,6 +6,7 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
 export const loginInfo = (token, id) => ({ type: LOGIN, token, id });
+export const logout = () => ({ type: LOGOUT });
 
 const initalState = {
   token: "",
