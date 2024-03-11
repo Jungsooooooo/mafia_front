@@ -1,13 +1,21 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import "../css/Login.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginInfo } from "../reducers/loginSession";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogged = useSelector((state) => state.loginSession);
+  useEffect(() => {
+    if (isLogged.token !== "") {
+      navigate("/");
+    }
+  }, []);
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
