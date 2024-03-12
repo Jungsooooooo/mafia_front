@@ -43,6 +43,10 @@ const Login = () => {
     });
   };
 
+  const handleGoToJoin = () => {
+    navigate("/join");
+  };
+
   return (
     <div className="centered">
       <div>
@@ -67,6 +71,7 @@ const Login = () => {
         />
       </div>
       <Button onClick={handleLogin}>로그인</Button>
+      <Button onClick={handleGoToJoin}>회원 가입</Button>
     </div>
   );
 };
