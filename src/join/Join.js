@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Box from "@mui/material/Box";
-import InputBase from "@mui/material/InputBase";
+import { useSelector } from "react-redux";
 import Input from "@mui/material/Input";
 
 import "../css/Join.css";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const isLogged = useSelector((state) => state.loginSession);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogged.token !== "") {
+      navigate("/");
+    }
+  }, []);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
