@@ -39,6 +39,7 @@ const Login = () => {
       if (res.data.token !== "") {
         dispatch(loginInfo(res.data.token, res.data.username));
         localStorage.setItem(res.data.id, res.data.token);
+        navigate("/");
       }
     });
   };
