@@ -1,0 +1,18 @@
+.centered {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.outline {
+  border: 1px solid #1976d2;
+  border-radius: 10px;
+}
+
+.joinId {
+  width: 20em;
+}
+.joinButton {
+  margin-top: 5em;
+}
