@@ -7,10 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginInfo } from "../reducers/loginSession";
 import { useNavigate } from "react-router-dom";
 
+import DialogModal from "../common/DialogModal";
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector((state) => state.loginSession);
+
+  const [openLoginSuccessModal, setOpenLoginSuccessModal] = useState(false);
+
   useEffect(() => {
     if (isLogged.token !== "") {
       navigate("/");
@@ -35,13 +40,19 @@ const Login = () => {
       username: username,
       password: password,
     };
-    axios.post("/api/auth/authenticate", input).then((res) => {
-      if (res.data.token !== "") {
-        dispatch(loginInfo(res.data.token, res.data.username));
-        localStorage.setItem(res.data.id, res.data.token);
-        navigate("/");
-      }
-    });
+
+    axios
+      .post("/api/auth/authenticate", input)
+      .then((res) => {
+        if (res.data.token !== "") {
+          dispatch(loginInfo(res.data.token, res.data.username));
+          localStorage.setItem(res.data.id, res.data.token);
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        setOpenLoginSuccessModal(true);
+      });
   };
 
   const handleGoToJoin = () => {
@@ -73,6 +84,11 @@ const Login = () => {
       </div>
       <Button onClick={handleLogin}>로그인</Button>
       <Button onClick={handleGoToJoin}>회원 가입</Button>
+      <DialogModal
+        open={openLoginSuccessModal}
+        title={"error"}
+        info={"아이디와 비밀번호를 확인해주세요."}
+      />
     </div>
   );
 };
