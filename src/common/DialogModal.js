@@ -8,12 +8,14 @@ import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 
 const DialogModal = (props) => {
-  const [open, setOpen] = useState(props.open);
+  const [open, setOpen] = useState(false);
   console.log(props);
 
   useEffect(() => {
     if (props.open === true) {
       handleModal();
+    } else {
+      handleClose();
     }
   }, [props.open]);
 
@@ -23,13 +25,14 @@ const DialogModal = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    console.log(open);
   };
 
   return (
     <>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={props.close}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -40,7 +43,7 @@ const DialogModal = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>확인</Button>
+          <Button onClick={props.close}>확인</Button>
         </DialogActions>
       </Dialog>
     </>
