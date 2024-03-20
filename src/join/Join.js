@@ -48,13 +48,17 @@ const Join = () => {
     axios
       .post("/api/users/join", input)
       .then((res) => {
-        console.log(res.data);
-        setOpenLoginSuccessModal(true);
+        console.log({ res });
         setJoinInfo("회원가입이 완료되었습니다.");
+        setOpenLoginSuccessModal(true);
       })
       .catch((error) => {
+        if (error.response.status === 400) {
+          // 400 오류에 대한 처리
+          const errorMessage = error.response.data.message;
+          setJoinInfo(errorMessage);
+        }
         setOpenLoginSuccessModal(true);
-        setJoinInfo("아이디가 중복됩니다");
       });
   };
 
