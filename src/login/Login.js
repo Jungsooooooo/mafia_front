@@ -40,7 +40,7 @@ const Login = () => {
       username: username,
       password: password,
     };
-
+    console.log(input);
     axios
       .post("/api/auth/authenticate", input)
       .then((res) => {
@@ -51,12 +51,17 @@ const Login = () => {
         }
       })
       .catch((error) => {
+        console.log({ error });
         setOpenLoginSuccessModal(true);
       });
   };
 
   const handleGoToJoin = () => {
     navigate("/join");
+  };
+
+  const handleModalClose = () => {
+    setOpenLoginSuccessModal(false);
   };
 
   return (
@@ -87,7 +92,8 @@ const Login = () => {
       <DialogModal
         open={openLoginSuccessModal}
         title={"error"}
-        info={"아이디와 비밀번호를 확인해주세요."}
+        info={"아이디와 비밀번호를 입력해주세요."}
+        close={handleModalClose}
       />
     </div>
   );
