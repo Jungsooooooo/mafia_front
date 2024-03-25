@@ -48,7 +48,6 @@ const Join = () => {
     axios
       .post("/api/users/join", input)
       .then((res) => {
-        console.log({ res });
         setJoinInfo("회원가입이 완료되었습니다.");
         setOpenLoginSuccessModal(true);
       })

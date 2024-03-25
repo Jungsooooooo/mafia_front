@@ -40,7 +40,6 @@ const Login = () => {
       username: username,
       password: password,
     };
-    console.log(input);
     axios
       .post("/api/auth/authenticate", input)
       .then((res) => {
@@ -51,7 +50,6 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.log({ error });
         setOpenLoginSuccessModal(true);
       });
   };
