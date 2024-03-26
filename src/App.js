@@ -8,7 +8,6 @@ import PrivateRoute from "./PrivateRoute";
 
 const App = () => {
   const checkLogin = useSelector((state) => state.loginSession);
-  console.log(checkLogin);
   return (
     <div className="App">
       <BrowserRouter>

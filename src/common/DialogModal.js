@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 
 const DialogModal = (props) => {
   const [open, setOpen] = useState(false);
-  console.log(props);
 
   useEffect(() => {
     if (props.open === true) {
@@ -25,7 +24,6 @@ const DialogModal = (props) => {
 
   const handleClose = () => {
     setOpen(false);
-    console.log(open);
   };
 
   return (
